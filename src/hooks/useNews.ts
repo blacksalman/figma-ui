@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-// import { NewsArticle, NewsState } from '@/types/news';
 import { NewsState } from '@/types/news';
 import { API_CONFIG } from '@/config/api';
 
@@ -15,9 +14,7 @@ export const useNews = (category: string = API_CONFIG.DEFAULT_CATEGORY) => {
     const fetchNews = async () => {
       try {
         setState(prev => ({ ...prev, loading: true, error: null }));
-        const response = await fetch(
-          `${API_CONFIG.BASE_URL}/top-headlines?country=${API_CONFIG.COUNTRY}&category=${category}&pageSize=${API_CONFIG.PAGE_SIZE}&apiKey=${API_CONFIG.API_KEY}`
-        );
+        const response = await fetch(`/api/news?category=${category}`);
         
         if (!response.ok) {
           throw new Error('Failed to fetch news');
